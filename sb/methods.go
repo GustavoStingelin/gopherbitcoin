@@ -11,6 +11,9 @@ func (b Bytes[T]) Bytes() T {
 	return b.value
 }
 
+// Slice returns a byte slice representation of the Bytes[T] value.
+// It escapes to heap, because slices are pointers to arrays, so use it
+// carefully.
 func (b Bytes[T]) Slice() []byte {
 	return unsafe.Slice(
 		(*byte)(unsafe.Pointer(&b.value)),
@@ -26,6 +29,8 @@ func (b Bytes[T]) Size() int {
 	return len(b.value)
 }
 
+// Reverse returns a new Bytes[T] with the bytes in reverse order.
+// This creates a new slice, so it escapes to heap, use it carefully.
 func (b Bytes[T]) Reverse() Bytes[T] {
 	reversed := make([]byte, len(b.value))
 	for i := 0; i < len(b.value); i++ {
