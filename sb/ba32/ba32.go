@@ -24,7 +24,7 @@ func Parse(b []byte) (sb.BA32, error) {
 func MustParse(b []byte) sb.BA32 {
 	out, err := Parse(b)
 	if err != nil {
-		panic(sb.ErrInvalidLength)
+		panic(err)
 	}
 	return out
 }
