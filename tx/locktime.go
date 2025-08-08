@@ -19,10 +19,10 @@ func (l LockTime) IsZero() bool {
 	return l.value == 0
 }
 
-func (l LockTime) IsBlockHeight() bool {
+func (l LockTime) IsBlockHeightLock() bool {
 	return l.value < MaxBlockHeightLockTime
 }
 
-func (l LockTime) IsTimestamp() bool {
+func (l LockTime) IsTimestampLock() bool {
 	return l.value >= MinTimestampLockTime
 }
