@@ -6,7 +6,8 @@ package sb
 // a consistent way to handle them. It provides a set of types and functions
 // to work with byte arrays and slices, including parsing, creating, and
 // zeroing them.
-//
-// Byte arrays are preferred over slices because they are more efficient and do
-// not require garbage collection. Byte slices uses pointers to arrays, and
-// pointers need garbage collection and heap allocation.
+
+// The first version of this package used generics to avoid code duplication,
+// but it sucks a little bit, so it was removed. The reason is to achieve
+// simplicity and clarity in the codebase, and also facilitate compiling
+// optimizations and performance.

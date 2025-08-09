@@ -1,20 +1,26 @@
 package bslice
 
 import (
+	"crypto/sha256"
 	"encoding/hex"
-	"gopherbitcoin/sb"
-	"gopherbitcoin/sb/internal"
+	"gopherbitcoin/sb/ba32"
 )
 
-func New(b []byte) sb.BSlice {
-	return sb.New(b)
+type bs []byte
+
+type BSlice struct {
+	bs
 }
 
-func Zero() sb.BSlice {
-	return sb.Zero[internal.ByteSlice]()
+func New(b []byte) BSlice {
+	return BSlice{b}
 }
 
-func ParseHex(s string) (sb.BSlice, error) {
+func Zero() BSlice {
+	return BSlice{}
+}
+
+func ParseHex(s string) (BSlice, error) {
 	b, err := hex.DecodeString(s)
 	if err != nil {
 		return Zero(), err
@@ -22,10 +28,35 @@ func ParseHex(s string) (sb.BSlice, error) {
 	return New(b), nil
 }
 
-func MustParseHex(s string) sb.BSlice {
+func MustParseHex(s string) BSlice {
 	out, err := ParseHex(s)
 	if err != nil {
 		panic(err)
 	}
 	return out
+}
+
+func (b BSlice) Bytes() []byte {
+	return b.bs
+}
+
+func (b BSlice) Size() int {
+	return len(b.bs)
+}
+
+func (b BSlice) SHA256() ba32.BA32 {
+	return ba32.New(sha256.Sum256(b.bs))
+}
+
+func (b BSlice) Reverse() BSlice {
+	l := len(b.bs)
+	reversed := make([]byte, l)
+	for i := 0; i < l; i++ {
+		reversed[i] = b.bs[l-1-i]
+	}
+	return New(reversed)
+}
+
+func (b BSlice) HexString() string {
+	return hex.EncodeToString(b.bs)
 }

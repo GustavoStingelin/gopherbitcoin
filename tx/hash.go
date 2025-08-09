@@ -1,12 +1,11 @@
 package tx
 
 import (
-	"gopherbitcoin/sb"
 	"gopherbitcoin/sb/ba32"
 )
 
 type Hash struct {
-	sb.BA32
+	ba32.BA32
 }
 
 func NewHash(b [32]byte) Hash {
