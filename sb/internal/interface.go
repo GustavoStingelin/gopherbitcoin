@@ -13,6 +13,7 @@ type iBytes[SubType, SuperType any] interface {
 	Reverse() SuperType
 	HexString() string
 	Size() int
+	Equal(other SuperType) bool
 }
 
 var _ iBytes[[32]byte, ba32.BA32] = new(ba32.BA32)

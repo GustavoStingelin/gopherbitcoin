@@ -86,3 +86,7 @@ func (b BA32) HexString() string {
 func (b BA32) String() string {
 	return string(b.b32[:])
 }
+
+func (b BA32) Equal(other BA32) bool {
+	return b.b32 == other.b32
+}

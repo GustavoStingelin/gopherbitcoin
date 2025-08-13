@@ -60,3 +60,16 @@ func (b BSlice) Reverse() BSlice {
 func (b BSlice) HexString() string {
 	return hex.EncodeToString(b.bs)
 }
+
+func (b BSlice) Equal(other BSlice) bool {
+	if len(b.bs) != len(other.bs) {
+		return false
+	}
+
+	for i := range b.bs {
+		if b.bs[i] != other.bs[i] {
+			return false
+		}
+	}
+	return true
+}
