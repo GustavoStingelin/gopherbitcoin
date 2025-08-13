@@ -20,7 +20,7 @@ func (l LockTime) IsZero() bool {
 }
 
 func (l LockTime) IsBlockHeightLock() bool {
-	return l.value < MaxBlockHeightLockTime
+	return l.value <= MaxBlockHeightLockTime
 }
 
 func (l LockTime) IsTimestampLock() bool {
